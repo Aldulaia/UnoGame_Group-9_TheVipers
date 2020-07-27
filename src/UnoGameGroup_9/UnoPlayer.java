@@ -60,7 +60,6 @@ public class UnoPlayer extends Player {
      * @param c The number that represents the index
      * @return A removed card to be displaced
      */
-
     public UnoCard pushCard(int c) {
 
         return handOfCards.remove(c);
@@ -131,7 +130,6 @@ public class UnoPlayer extends Player {
      * To hide the cards of the player, called by another method in the UNO
      * class
      */
-
     public void coverCards() {
 
         String[] card = {" ----- ", "|     |", "|     |", " ----- "};
