@@ -1,27 +1,30 @@
-/*
-Naming is done for this class, and all is needed is to replace declareWinner with another method 
-and add Override.
- */
 package UnoGameGroup_9;
 
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * This class represents the game and it's functions
+ *
+ * @author Group_9 (The Vipers)
+ */
 public class UnoGame extends Game {
 
-    private UnoCard currentCard; // the current card or previously played card or starting card
-    private GroupOfCards deckOfCards; // the deck of the game
-    private ArrayList<UnoCard> pileOfCards; //when players throw card, it piles up here. Also, creates a new deck if the current deck is empty
-    private int punishment; // when wildcards stack up the penalty stacks up. If a player is unable to counter the current wildcard on play, player is penalised "penalty" number of cards
+    // declared variable
+    private UnoCard currentCard;
+    private GroupOfCards deckOfCards;
+    private ArrayList<UnoCard> pileOfCards;
+    private int punishment;
     private Scanner input;
-    private UnoPlayer player1, player2; //player 1 and 2
-    private int pickCard; // players pick
+    private UnoPlayer player1, player2;
+    private int pickCard;
 
+    /**
+     * It constructs the game and 
+     * prepare the game to be initiated
+     */
     public UnoGame() {
-        /*constructor
-		 * constructs the game
-		 * prepares the game to play
-         */
+        
         super("Uno");
         deckOfCards = new GroupOfCards();
         deckOfCards.shuffle();
@@ -36,11 +39,14 @@ public class UnoGame extends Game {
 
     }
 
+    /**
+     * This method is overwritten upon 
+     * the super class to simulate the turn 
+     * between player one and player two
+     */
     @Override
     public void play() {
-        /* this method simulates turns between the two players. when turn is even, player 1 plays and when 
-			   turn is odd player 2 plays.
-         */
+        
         int whoTurn = 0;
         while (!declareWinner(player1, player2)) {
             if (whoTurn % 2 == 0) {
@@ -53,8 +59,11 @@ public class UnoGame extends Game {
 
     }
 
+    /**
+     * This method is created to distribute the cards
+     */
     private void handOutCards() {
-        //this method distributes cards to the players
+       
         for (int i = 0; i < 10; i++) {
 
             if (i % 2 == 0) {
@@ -66,10 +75,12 @@ public class UnoGame extends Game {
         }
     }
 
+    /**
+     * This method contains the entire process of the game
+     * @param p  An UNO player as an argument
+     */
     public void playUnoGame(UnoPlayer p) {
-        /*	 this method takes player that is currently playing as an argument.
-			 this method contains entire process for the game.
-         */
+     
 
         lineDecoration();
         System.out.println(p + ", It is your turn\nThe current card on play is:\n" + currentCard);
@@ -101,7 +112,7 @@ public class UnoGame extends Game {
 
         }
 
-//		}   
+  
         if (!matchColour(p) && !matchValue(p) && !hasSpecialCard(p)) {
             UnoCard pick = null;
             System.out.println("You dont have a valid card to play, so you have to pick cards.");
@@ -122,7 +133,7 @@ public class UnoGame extends Game {
 
         System.out.println("Please pick a card:");
         pickCard = input.nextInt() - 1;
-        //System.out.println(pick);
+      
 
         while (!validateTheChoice(p, pickCard)) {
 
@@ -136,11 +147,16 @@ public class UnoGame extends Game {
         p.claimUno();
         currentCard = play;
         pileOfCards.add(currentCard);
-        //reviveDeck();
+       
     }
 
+    /**
+     * This method is to check for a special value
+     * @param p  The player as an object
+     * @return  A Boolean value 
+     */
     private boolean hasSpecialCard(UnoPlayer p) {
-        // TODO Auto-generated method stub
+        
 
         for (UnoCard c : p.listOfCards()) {
 
@@ -153,14 +169,16 @@ public class UnoGame extends Game {
         return false;
     }
 
+    /**
+     * This method is to check if the user choose a valid choice or not
+     * @param p  The UNO player
+     * @param choice  An integer represents the index
+     * @return   A Boolean value 
+     */
     private boolean validateTheChoice(UnoPlayer p, int choice) {
 
-        /*
-		 * checks if the user selection was a valid choice or not
-		 * to be a valid choice: the player must have the card, the card must be either the same color or value as the current card(card in play/previously played card)
-         */
         if (choice <= p.listOfCards().size()) {
-            //add for special
+            
 
             if (p.listOfCards().get(choice).getColor().equals(currentCard.getColor()) || p.listOfCards().get(choice).getValue() == currentCard.getValue() || p.listOfCards().get(choice).isSpecialCard()) {
                 return true;
@@ -171,21 +189,24 @@ public class UnoGame extends Game {
         return false;
     }
 
+    /**
+     * This method is to pause the rhythm of the game
+     * and let the user engage by pressing Enter.
+     */
     private void stop() {
-        /*
-		 * creates a pause
-		 * asks the user to press enter
-		 * purpose is simply to get user engagement
-         */
+       
         System.out.println("Press enter to continue......");
         input.nextLine();
 
     }
+    /**
+     * this method is to check if the color matches.
+     * @param p  The player as an object
+     * @return A Boolean value 
+     */
 
     private boolean matchColour(UnoPlayer p) {
-        /*
-		 * checks if player has card of the same color as the current card that is being played
-         */
+       
         for (UnoCard c : p.listOfCards()) {
 
             if (c.getColor().equals(currentCard.getColor())) {
@@ -197,10 +218,13 @@ public class UnoGame extends Game {
         return false;
     }
 
+    /**
+     * This method check if the card value matches
+     * @param p  The player as an object
+     * @return  A Boolean value
+     */
     private boolean matchValue(UnoPlayer p) {
-        /*
-		 * checks if the player has the card of the same value as the current that is being played. 
-         */
+       
 
         for (UnoCard c : p.listOfCards()) {
 
@@ -214,13 +238,14 @@ public class UnoGame extends Game {
         return false;
     }
 
+    /**
+     * This method check is the player carries a wildCard
+     * @param p  The player as an object
+     * @return A Boolean value
+     */
     private boolean hasWildCard(UnoPlayer p) {
 
-        /*
-		 * checks if player has a wild card (special card)
-		 * special cards can be played when you don't have a card with the same color or the value of the card that is being currently played
-		 * if the current card is a special card, then player must have a special card with the same or greater value to play.
-         */
+        
         for (UnoCard c : p.listOfCards()) {
 
             if (c.isSpecialCard()) {
@@ -232,30 +257,39 @@ public class UnoGame extends Game {
 
         return false;
     }
+    /**
+     * This method is to decorate the output on the console
+     */
 
     private void lineDecoration() {
-        /*
-		 * draws asterik lines
-         */
 
         System.out.println("== == == == == == == == == == == == == ==");
     }
 
+    /**
+     * This method is to return the starting card
+     * and can not be a special card
+     * @return  The starting card of the game
+     */
     private UnoCard startingCard() {
 
-        /*
-		 * gets a valid starting card.
-		 * starting card cannot be a special card
-         */
-        UnoCard temp = deckOfCards.peeeeeeks();
+       
+        UnoCard temp = deckOfCards.oneLess();
         while (temp.isSpecialCard()) {
             deckOfCards.shuffle();
-            temp = deckOfCards.peeeeeeks();
+            temp = deckOfCards.oneLess();
         }
 
         temp = deckOfCards.getTopCard();
         return temp;
     }
+    
+    /**
+     * 
+     * @param p1  The first player
+     * @param p2  The second player
+     * @return A Boolean value 
+     */
 
     @Override
     public boolean declareWinner(UnoPlayer p1, UnoPlayer p2) {
@@ -275,6 +309,11 @@ public class UnoGame extends Game {
         return false;
     }
 
+    /**
+     * This method is to shoe the players turn
+     * and turn the focus on the current turn
+     * @param p  The player
+     */
     public void gameBoard(UnoPlayer p) {
 
         if (p.toString().equals("Player 1")) {
@@ -294,6 +333,9 @@ public class UnoGame extends Game {
         }
 
     }
+    /**
+     * This method is created for decoration
+     */
 
     public void pyramidPattern() {
 
@@ -309,7 +351,7 @@ public class UnoGame extends Game {
         }
         System.out.println(" ");
         System.out.println(" Advisor and Developed By: ");
-        System.out.println(" Altaher, AlQasim, Onisha ");
+        System.out.println(" Altaher, AlQasim, Onisha, Singh ");
         System.out.println(" Group_9 ");
         System.out.println(" ");
     }

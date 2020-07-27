@@ -3,60 +3,74 @@ package UnoGameGroup_9;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * This class represents the Player, also methods and operations implemented.
+ *
+ * @author Group_9 (The Vipers)
+ */
 public class UnoPlayer extends Player {
 
     private ArrayList<UnoCard> handOfCards;
-    private String playerName; //player name
+    private String playerName;
 
+    /**
+     * It constructs and creates an array that holds the player cards.
+     *
+     * @param name The name of the player
+     */
     public UnoPlayer(String name) {
-        /*
-		 * creates a array list that will store player cards
-		 * assigns name to the player
-         */
 
-        //player object are created in uno class
         super();
         handOfCards = new ArrayList<UnoCard>();
         this.playerName = name;
 
     }
 
+    /**
+     * @return The size of the deck on hand
+     */
     public int numOfCards() {
-        /*
-		 * returns number of cards player has in hand
-         */
+
         return handOfCards.size();
     }
 
+    /**
+     * @return the array list that holds the cards on hand
+     */
     public ArrayList<UnoCard> listOfCards() {
-        /*
-		 * returns all the cards player has in hand as an ArrayList
-		 * This is used mainly to check if player has any valid cards to play.(Check the Uno class)
-         */
 
         return handOfCards;
     }
 
+    /**
+     * This method is to add the object to the hand of the player
+     *
+     * @param c an object that represents the UNO card
+     */
     public void withDrawCards(UnoCard c) {
-        /*
-		 * 
-         */
+
         handOfCards.add(c);
 
     }
 
+    /**
+     * This method is to remove and displace the used card out of the player's
+     * hand
+     *
+     * @param c The number that represents the index
+     * @return A removed card to be displaced
+     */
+
     public UnoCard pushCard(int c) {
-        /*
-		 * player throws a card from hand which is at position 'c'. c is a integer value and is passed as an argument.
-         */
 
         return handOfCards.remove(c);
     }
 
+    /**
+     * This method is called when the player own last card on his deck
+     */
     public void claimUno() {
-        /*
-		 * player says uno if they only have 1 card in the hand.
-         */
+
         Scanner input = new Scanner(System.in);
 
         if (handOfCards.size() == 1) {
@@ -67,13 +81,11 @@ public class UnoPlayer extends Player {
         }
     }
 
+    /**
+     * This method overwritten upon the super class to initiate the game
+     */
     @Override
     public void play() {
-        /*
-		 * this is graphical representation of a card
-		 * just to make cards look more look like cards
-		 * used in showboard() method in Uno class
-         */
 
         String[] stringCards = {" ----- ", "|     |", "|     |", " ----- "};
         String p = "";
@@ -115,12 +127,13 @@ public class UnoPlayer extends Player {
         System.out.print(p);
     }
 
+    /**
+     * To hide the cards of the player, called by another method in the UNO
+     * class
+     */
+
     public void coverCards() {
 
-        /*
-		 * to hide player cards
-		 * used in showboard() method in Uno class
-         */
         String[] card = {" ----- ", "|     |", "|     |", " ----- "};
         String b = "";
 
@@ -137,10 +150,12 @@ public class UnoPlayer extends Player {
         System.out.print(b);
     }
 
+    /**
+     * Checks if the has already won or not
+     *
+     * @return A Boolean value
+     */
     public boolean checkWinner() {
-        /*
-		 * checks if player has won or not
-         */
         if (handOfCards.size() == 0) {
             return true;
         }
@@ -148,9 +163,7 @@ public class UnoPlayer extends Player {
     }
 
     public String toString() {
-        /*
-		 * text representation of player
-         */
+
         return this.playerName;
     }
 

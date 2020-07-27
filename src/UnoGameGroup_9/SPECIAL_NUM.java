@@ -1,13 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package UnoGameGroup_9;
 
 /**
+ * This class is an Enum that represents the Special Values
  *
- * @author QQ
+ * @author Group_9 (The Vipers)
  */
 public enum SPECIAL_NUM {
     PLUS_TWO(2),
@@ -19,12 +15,5 @@ public enum SPECIAL_NUM {
     private SPECIAL_NUM(int n) {
         this.specNum = n;
     }
-//
-//    public boolean  isSpecial_num() {
-//        if (special) {
-//           special = true;
-//        }
-//         return special;
-//    }
 
 }

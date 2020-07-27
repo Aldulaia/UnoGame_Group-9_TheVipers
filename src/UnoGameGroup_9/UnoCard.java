@@ -1,79 +1,87 @@
 package UnoGameGroup_9;
 
+/**
+ * This class represents the UNO card itself, beside functions and properties to
+ * control it
+ *
+ * @author Group_9 (The Vipers)
+ */
 public class UnoCard extends Card {
 
+    //declare the variables
     private COLORS color;
     private VALUE value;
     private SPECIAL_NUM specialValue;
     private boolean checkSpecial;
 
+    /**
+     * It constructs the non special card, also setting the color an the numeric
+     * value
+     *
+     * @param value The value of the card
+     * @param color The color of the card
+     */
     public UnoCard(VALUE value, COLORS color) {
 
-        /*
-		 * constructs a non speicla card
-		 * sets the color and numerical value
-		 * sets it to the normal card category
-         */
         this.color = color;
         this.value = value;
         this.specialValue = null;
         this.checkSpecial = false;
     }
 
-    public UnoCard(SPECIAL_NUM specialValue) { // constructor for special cards like +4 and +2	
+    /**
+     * It constructs the special card and sets the card to the special category
+     *
+     * @param specialValue The Special Values that are assigned inside the Enum
+     */
+    public UnoCard(SPECIAL_NUM specialValue) {
 
-        /*
-		 * assigns special value to the card
-		 * sets the card to special category
-         */
         this.color = COLORS.NONE;
         this.specialValue = specialValue;
         this.value = VALUE.ZERO;
         this.checkSpecial = true;
     }
 
+    /**
+     * this method simply returns the color of the card
+     *
+     * @return The color of card
+     */
     public COLORS getColor() {
-        /*
-		 * returns color of the card
-         */
 
         return this.color;
     }
 
+    /**
+     * this method simply returns the value of the card
+     *
+     * @return The value of card
+     */
     public int getValue() {
 
-        /*
-		 * returns numerical value of the card
-         */
         return this.value.getNumVal();
 
     }
 
+    /**
+     * this method simply returns the numeric value of the card
+     *
+     * @return The numeric value of that card
+     */
     public SPECIAL_NUM getSpecial_num() {
 
-        /*
-		 * returns numerical value of the card
-         */
         return this.specialValue;
 
     }
 
+    /**
+     * This to string method is to Shape the card appearance using the console
+     * to display it
+     *
+     * @return The string that shapes the card
+     */
     public String toString() {
 
-        /*
-		 * prints the card.
-		 * prints [ color - card value ] if the card is not a special card
-		 * prints [ + value ] if it is a special card 
-         */
-//		if(!special) {
-//			return "[ "+this.color+"-"+this.value+" ]";
-//		}
-//		
-//		else if(special){
-//			
-//			return "[ "+"+"+this.specialValue+" ]"; 
-//		}
-//		return null;
         String[] card = {" ----- ------", "|     |", "|     |", " ----- ------ "};
         String o = "";
 
@@ -115,12 +123,13 @@ public class UnoCard extends Card {
 
     }
 
+    /**
+     * This method checks if the card special or not
+     *
+     * @return A Boolean value represents a special checker
+     */
     public boolean isSpecialCard() {
 
-        /*
-		 * returns true if card is a special card
-		 * returns false if card is not a special card
-         */
         if (checkSpecial) {
             return true;
         }
