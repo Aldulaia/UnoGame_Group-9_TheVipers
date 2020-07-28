@@ -351,7 +351,7 @@ public class UnoGame extends Game {
         System.out.println(" ");
         System.out.println(" Advisor and Developed By: ");
         System.out.println(" Altaher, AlQasim, Onisha, Gurkirat ");
-        System.out.println(" Group_9 ");
+        System.out.println(" Group_9 (The Vipers) ");
         System.out.println(" ");
     }
 
