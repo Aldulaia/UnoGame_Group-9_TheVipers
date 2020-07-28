@@ -12,7 +12,7 @@ public class UnoGame extends Game {
 
     // declared variable
     private UnoCard currentCard;
-    private GroupOfCards deckOfCards;
+    private Deck deckOfCards;
     private ArrayList<UnoCard> pileOfCards;
     private int punishment;
     private Scanner input;
@@ -25,7 +25,7 @@ public class UnoGame extends Game {
     public UnoGame() {
 
         super("Uno");
-        deckOfCards = new GroupOfCards();
+        deckOfCards = new Deck();
         deckOfCards.shuffle();
         punishment = 0;
         currentCard = startingCard();
@@ -95,7 +95,7 @@ public class UnoGame extends Game {
                 for (int i = 0; i < punishment; i++) {
 
                     if (deckOfCards.isEmpty()) {
-                        deckOfCards = new GroupOfCards(pileOfCards);
+                        deckOfCards = new Deck(pileOfCards);
                     }
                     pick = deckOfCards.getTopCard();
                     p.withDrawCards(pick);
@@ -350,7 +350,7 @@ public class UnoGame extends Game {
         }
         System.out.println(" ");
         System.out.println(" Advisor and Developed By: ");
-        System.out.println(" Altaher, AlQasim, Onisha, Singh ");
+        System.out.println(" Altaher, AlQasim, Onisha, Gurkirat ");
         System.out.println(" Group_9 ");
         System.out.println(" ");
     }
